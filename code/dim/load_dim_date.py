@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import datetime
-import time
+import  from package
 
 df_index = pd.date_range(datetime.date(2000,1,1), datetime.date(2030,1,1))
 
@@ -17,9 +17,4 @@ df_date["month_full_name"] = df_index.strftime("%B")
 df_date["month_short_name"] = df_index.strftime("%b")
 df_date["week_full_name"] = df_index.strftime("%A")
 df_date["week_short_name"] = df_index.strftime("%a")
-
-
-
-
-
 

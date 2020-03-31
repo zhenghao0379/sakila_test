@@ -1,0 +1,6 @@
+state,host,port,user,password,db_name
+dev,122.51.96.21,3306,sakila_test,123456zZ.,sakila
+dev,122.51.96.21,3306,sakila_test,123456zZ.,sakila_dwh
+dev,122.51.96.21,3306,sakila_test,123456zZ.,sakila_dwh_py
+test,122.51.96.21,3306,sakila_test,123456zZ.,sakila
+test,122.51.96.21,3306,sakila_test,123456zZ.,test

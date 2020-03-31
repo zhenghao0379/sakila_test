@@ -4,12 +4,9 @@ import pandas as pd
 import datetime
 import calendar
 import pendulum
-# import  from package
 
-path = sys.path[0]
-print(path)
-
-
+from package.env import *
+from package.sql_connect import *
 
 
 # 自定义函数
@@ -59,3 +56,7 @@ df_date["year_quarter"] = df_date["year4"] + '-' + df_date["quarter_name"]
 df_date["year_month_number"] = df_index.strftime("%Y-%m")
 df_date["year_month_abbreviation"] = df_index.strftime("%Y-%b")
 
+dev()
+conn, engine = mysql_on("sakila_dwh_py")
+
+mysql_upload(df_date, "load_dim_date", conn, engine, type="r")

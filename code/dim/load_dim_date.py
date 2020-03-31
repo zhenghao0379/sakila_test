@@ -1,8 +1,10 @@
 # 定位到工作根目录
-import sys
-from os.path import abspath, join, dirname
-sys.path.insert(0, join(abspath(dirname(__file__)), '../..'))
+# import sys
+# from os.path import abspath, join, dirname
+# sys.path.insert(0, join(abspath(dirname(__file__)), '\..\..'))
 
+import os, sys
+print(os.path.dirname(sys.argv[0]) + '/../..')
 
 import numpy as np
 import os, sys

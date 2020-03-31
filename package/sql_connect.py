@@ -1,10 +1,12 @@
 import pandas as pd
 import pymysql
 import sqlalchemy
-from env import DATE, DATETIME, DAYS, RPT_TYPES
+from env import *
 
 # 定义连接的全局变量
 CONNS = ""
+CONN = ''
+ENGINE = ''
 MYSQL_USER = ""
 
 # 环境切换
@@ -24,7 +26,7 @@ def dev():
 
 # 选择数据库
 def mysql_on(db_name):
-    global CONNS, MYSQL_USER
+    global CONNS, MYSQL_USER, CONN, ENGINE
     mysql_user = {
         "host": CONNS.loc[CONNS["db_name"] == db_name, "host"].item(),
         "port": CONNS.loc[CONNS["db_name"] == db_name, "port"].item(),
@@ -47,7 +49,8 @@ def mysql_on(db_name):
         mysql_user["host"])+":" + str(mysql_user["port"]) + "/" + db_name + "?charset=utf8"
     engine = sqlalchemy.create_engine(url, echo=False, encoding='utf-8')
     print(engine)
-
+    CONN = conn
+    ENGINE = ENGINE
     return conn, engine
 
 
@@ -110,11 +113,12 @@ def mysql_upload(df, table_name, conn, engine, type, *day):
     return print("upload success !")
 
 
-def mysql_close(conn, engine):
+def mysql_close(conn=CONN, engine=ENGINE):
     conn.close()
     engine.dispose()
     print("the connector has been closed!")
 
 
 def kill_all_connector():
+
     pass

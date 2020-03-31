@@ -2,14 +2,16 @@
 
 # 载入工具包
 import datetime
-import os, sys
+import os
 import configparser
-
+# 设置路径
+path = os.path.dirname(os.path.abspath(__file__))
+# 读取config.ini
 config = configparser.ConfigParser()
-config.read('../config/config.ini')
-print(config)
+config.read(path + '\..\config\config.ini')
+# 设置工作目录（绝对路径）
 workspace = config.get('default', 'workspace')
-
+print('workspace =', workspace)
 os.chdir(workspace)
 
 # 全局变量

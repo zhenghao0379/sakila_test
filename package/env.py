@@ -4,6 +4,7 @@
 import datetime
 import os
 import configparser
+
 # 设置路径
 path = os.path.dirname(os.path.abspath(__file__))
 # 读取config.ini
@@ -27,4 +28,17 @@ print("DAYS:", DAYS)
 RPT_TYPES = "D"
 print("RPT_TYPES:", RPT_TYPES)
 
+
+class global_val:
+    def __init__(self):
+        self.DATE = DATE
+        self.DATETIME = DATETIME
+        self.DAYS = DAYS
+        self.RPT_TYPE = RPT_TYPES
+
+    def get_val(self, item):
+        pass
+
+    def set_val(self, item):
+        pass
 print("env load")

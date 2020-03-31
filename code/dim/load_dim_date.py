@@ -3,20 +3,15 @@
 # from os.path import abspath, join, dirname
 # sys.path.insert(0, join(abspath(dirname(__file__)), '\..\..'))
 
-import os, sys
-print(os.path.dirname(sys.argv[0]) + '/../..')
+# 加载环境文件
+from package.env import *
+from package.sql_connect import *
 
-import numpy as np
-import os, sys
+# 加载工具包
 import pandas as pd
 import datetime
-import calendar
 import pendulum
 
-from package.env import *
-print(1)
-from package.sql_connect import *
-print(2)
 
 # 自定义函数
 def week_in_month(date_value):
@@ -36,7 +31,8 @@ def quarter_number(x):
     else:
         return 'error'
 
-df_index = pd.date_range(datetime.date(2000,1,1), datetime.date(2030,1,1))
+
+df_index = pd.date_range(datetime.date(2000, 1, 1), datetime.date(2030, 1, 1))
 
 df_date = pd.DataFrame()
 
@@ -48,12 +44,14 @@ df_date["date_long"] = df_index.strftime("%B %d, %Y")
 df_date["date_full"] = df_index.strftime("%A, %B %d, %Y")
 df_date["day_in_year"] = df_index.strftime("%j")
 df_date["day_in_month"] = df_index.strftime("%d")
+df_date["is_first_day_in_month"] = 'yes'
+df_date["is_last_day_in_month"] = 'no'
 df_date["day_abbreviation"] = df_index.strftime("%a")
 df_date["day_name"] = df_index.strftime("%A")
 df_date["week_in_year"] = df_index.strftime("%W")
 df_date["week_in_month"] = df_date["date_value"].apply(week_in_month)
-df_date["is_first_in_week"] = df_date["day_abbreviation"].apply(lambda x: 'yes' if x == 'Mon' else 'no')
-df_date["is_last_in_week"] = df_date["day_abbreviation"].apply(lambda x: 'yes' if x == 'Sun' else 'no')
+df_date["is_first_day_in_week"] = df_date["day_abbreviation"].apply(lambda x: 'yes' if x == 'Mon' else 'no')
+df_date["is_last_day_in_week"] = df_date["day_abbreviation"].apply(lambda x: 'yes' if x == 'Sun' else 'no')
 df_date["month_number"] = df_index.strftime("%m")
 df_date["month_abbreviation"] = df_index.strftime("%b")
 df_date["month_name"] = df_index.strftime("%B")
@@ -67,5 +65,5 @@ df_date["year_month_abbreviation"] = df_index.strftime("%Y-%b")
 
 dev()
 conn, engine = mysql_on("sakila_dwh_py")
-
-mysql_upload(df_date, "load_dim_date", conn, engine, type="r")
+mysql_upload(df_date, "dim_date", conn, engine, type="r", update_time=False)
+mysql_close(conn, engine)

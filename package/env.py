@@ -2,6 +2,15 @@
 
 # 载入工具包
 import datetime
+import os, sys
+import configparser
+
+config = configparser.ConfigParser()
+config.read('../config/config.ini')
+print(config)
+workspace = config.get('default', 'workspace')
+
+os.chdir(workspace)
 
 # 全局变量
 # 时间

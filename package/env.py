@@ -15,3 +15,5 @@ DAYS = (datetime.datetime.now() - datetime.timedelta(1)).strftime("%Y-%m-%d")
 print("DAYS:", DAYS)
 RPT_TYPES = "D"
 print("RPT_TYPES:", RPT_TYPES)
+
+print("env load")

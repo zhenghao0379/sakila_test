@@ -56,7 +56,4 @@ def get_day_start_end(day, rpt_type):
     }.get(rpt_type, "error")
     return start, end
 
-
-start, end = get_day_start_end("2019-12-12", "M")
-print(start)
-print(end)
+print("public load")

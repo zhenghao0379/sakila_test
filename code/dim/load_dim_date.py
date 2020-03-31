@@ -1,3 +1,9 @@
+# 定位到工作根目录
+import sys
+from os.path import abspath, join, dirname
+sys.path.insert(0, join(abspath(dirname(__file__)), '../..'))
+
+
 import numpy as np
 import os, sys
 import pandas as pd
@@ -6,8 +12,9 @@ import calendar
 import pendulum
 
 from package.env import *
+print(1)
 from package.sql_connect import *
-
+print(2)
 
 # 自定义函数
 def week_in_month(date_value):
